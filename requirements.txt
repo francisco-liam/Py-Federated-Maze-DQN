@@ -1,0 +1,7 @@
+# Python dependencies for the DQN training baseline.
+# The Unity ML-Agents dependency has been removed — the environment is now
+# a pure Python / Pygame implementation in train/maze_env/.
+
+torch>=2.0.0
+numpy>=1.24.0
+pygame>=2.0.0
