@@ -407,7 +407,8 @@ class MazeEnv:
         pygame.display.flip()
         self._clock.tick(30)
 
-        # Allow the window to be closed without crashing
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                self.close()
+        # Only consume QUIT events so that callers with their own event loops
+        # (e.g. play.py) still receive keyboard events from the queue.
+        if pygame.event.peek(pygame.QUIT):
+            pygame.event.clear(pygame.QUIT)
+            self.close()

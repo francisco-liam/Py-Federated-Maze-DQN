@@ -20,17 +20,22 @@ Agent ──(obs 26f)──► QNetwork (MLP) ──► 5 Q-values ──► act
 
 ```
 Federated-DQN-Maze/
-├── train_dqn.py          # Training loop entry point
-├── dqn_agent.py          # DQN agent (exploration, training, checkpointing)
-├── q_network.py          # 3-layer MLP Q-network
-├── replay_buffer.py      # Uniform circular experience replay buffer
+├── train_dqn.py              # Training loop entry point
+├── play.py                   # Play the maze manually (arrow keys / WASD)
+├── test_env.py               # Quick environment smoke test (random agent)
 ├── requirements.txt
+├── .gitignore
+├── agent/
+│   ├── __init__.py
+│   ├── dqn_agent.py          # DQN agent (exploration, training, checkpointing)
+│   ├── q_network.py          # 3-layer MLP Q-network
+│   └── replay_buffer.py      # Uniform circular experience replay buffer
 └── maze_env/
     ├── __init__.py
-    ├── definitions.py    # Enums: MazeCellType, MazeAction, MazeTerminalReason
-    ├── maze_builder.py   # Procedural DFS maze generation + obstacle placement
-    ├── maze_env.py       # Gym-style environment wrapper (reset / step / close)
-    └── moving_obstacle.py # Deterministic ping-pong hazard
+    ├── definitions.py        # Enums: MazeCellType, MazeAction, MazeTerminalReason
+    ├── maze_builder.py       # Procedural DFS maze generation + obstacle placement
+    ├── maze_env.py           # Gym-style environment wrapper (reset / step / close)
+    └── moving_obstacle.py    # Deterministic ping-pong hazard
 ```
 
 ---
@@ -137,6 +142,7 @@ Checkpoints are saved to `checkpoints/dqn_ep{N}.pt`. To resume from a checkpoint
 ## Installation
 
 ```bash
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -148,6 +154,8 @@ Requirements:
 ---
 
 ## Usage
+
+### Train the DQN agent
 
 ```bash
 python train_dqn.py
@@ -164,6 +172,28 @@ To resume from a checkpoint, edit `train_dqn.py`:
 ```python
 RESUME_FROM: Optional[str] = "checkpoints/dqn_ep200.pt"
 ```
+
+Checkpoints are saved to `checkpoints/` (gitignored) every 200 episodes.
+
+### Play the maze yourself
+
+```bash
+python play.py
+```
+
+| Key | Action |
+|-----|--------|
+| Arrow keys / WASD | Move |
+| R | New maze |
+| Q / Escape | Quit |
+
+### Test the environment (random agent)
+
+```bash
+python test_env.py
+```
+
+Runs 3 episodes with random actions and prints the return. Set `RENDER = False` in the file for headless mode.
 
 ---
 

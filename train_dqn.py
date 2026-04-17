@@ -34,7 +34,7 @@ from typing import Optional
 
 import numpy as np
 
-from dqn_agent import DQNAgent
+from agent import DQNAgent
 from maze_env import MazeEnv
 
 # ---------------------------------------------------------------------------

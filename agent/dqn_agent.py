@@ -18,8 +18,8 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 
-from q_network import QNetwork
-from replay_buffer import ReplayBuffer
+from .q_network import QNetwork
+from .replay_buffer import ReplayBuffer
 
 
 class DQNAgent:
