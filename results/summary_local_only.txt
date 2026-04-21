@@ -1,0 +1,46 @@
+====================================================================
+SUMMARY — Local-only DQN (lower bound, no sharing)
+====================================================================
+seeds=[0, 42, 99]  held_out=7
+episodes_per_agent=1500
+
+  Agent seed=0 — eval history on held-out seed=7:
+    ep= 150  mean_return=-1.290  success=0%  avg_len=200.0  [                    ]
+    ep= 300  mean_return=-1.450  success=10%  avg_len=200.0  [##                  ]
+    ep= 450  mean_return=-0.750  success=0%  avg_len=200.0  [                    ]
+    ep= 600  mean_return=-1.140  success=0%  avg_len=200.0  [                    ]
+    ep= 750  mean_return=-1.543  success=0%  avg_len=200.0  [                    ]
+    ep= 900  mean_return=-1.535  success=0%  avg_len=200.0  [                    ]
+    ep=1050  mean_return=-1.773  success=0%  avg_len=200.0  [                    ]
+    ep=1200  mean_return=-1.558  success=0%  avg_len=200.0  [                    ]
+    ep=1350  mean_return=-1.528  success=0%  avg_len=200.0  [                    ]
+    ep=1500  mean_return=-1.523  success=0%  avg_len=200.0  [                    ]
+  Final 50-ep:  mean_return=-1.556  ±0.137  success_rate=0%  avg_ep_len=200.0
+
+  Agent seed=42 — eval history on held-out seed=7:
+    ep= 150  mean_return=-2.453  success=0%  avg_len=200.0  [                    ]
+    ep= 300  mean_return=-2.410  success=0%  avg_len=200.0  [                    ]
+    ep= 450  mean_return=-2.255  success=0%  avg_len=200.0  [                    ]
+    ep= 600  mean_return=-2.053  success=0%  avg_len=200.0  [                    ]
+    ep= 750  mean_return=-2.028  success=0%  avg_len=200.0  [                    ]
+    ep= 900  mean_return=-2.040  success=0%  avg_len=200.0  [                    ]
+    ep=1050  mean_return=-2.165  success=0%  avg_len=200.0  [                    ]
+    ep=1200  mean_return=-2.088  success=0%  avg_len=200.0  [                    ]
+    ep=1350  mean_return=-2.078  success=0%  avg_len=200.0  [                    ]
+    ep=1500  mean_return=-2.068  success=0%  avg_len=200.0  [                    ]
+  Final 50-ep:  mean_return=-2.069  ±0.042  success_rate=0%  avg_ep_len=200.0
+
+  Agent seed=99 — eval history on held-out seed=7:
+    ep= 150  mean_return=-1.323  success=0%  avg_len=200.0  [                    ]
+    ep= 300  mean_return=-1.750  success=0%  avg_len=200.0  [                    ]
+    ep= 450  mean_return=-2.313  success=0%  avg_len=200.0  [                    ]
+    ep= 600  mean_return=-2.413  success=0%  avg_len=200.0  [                    ]
+    ep= 750  mean_return=-2.295  success=0%  avg_len=200.0  [                    ]
+    ep= 900  mean_return=-2.000  success=0%  avg_len=200.0  [                    ]
+    ep=1050  mean_return=-2.325  success=0%  avg_len=200.0  [                    ]
+    ep=1200  mean_return=-2.453  success=0%  avg_len=200.0  [                    ]
+    ep=1350  mean_return=-2.453  success=0%  avg_len=200.0  [                    ]
+    ep=1500  mean_return=-2.345  success=0%  avg_len=200.0  [                    ]
+  Final 50-ep:  mean_return=-2.342  ±0.461  success_rate=0%  avg_ep_len=200.0
+
+  Mean across agents:  success_rate=0%  mean_return=-1.989  avg_ep_len=200.0

@@ -52,10 +52,13 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 # This gives each client's Q-network enough signal to be meaningful before
 # aggregation — the key difference from training with only 5–10 eps/round
 # (which causes Q-values to diverge before they can learn anything useful).
-FL_ROUNDS      = 50
-LOCAL_EPISODES = 30    # episodes per client per round
-EVAL_EVERY     = 5     # evaluate global model every N rounds
-EVAL_EPISODES  = 20
+FL_ROUNDS         = 50
+LOCAL_EPISODES    = 30    # episodes per client per round
+EVAL_EVERY        = 5     # evaluate every N rounds
+EVAL_EPISODES     = 20
+# Fine-tune episodes for transfer eval on held-out seed=7.
+# Warmup=2000 steps; ~200 steps/ep → 10 eps to warm up, then FC starts training.
+FINETUNE_EPISODES = 30
 EVAL_EPS       = 0.05
 SAVE_EVERY     = 10
 
@@ -151,7 +154,7 @@ def main():
     client_seed_hdr = "  ".join(f"sr{s}" for s in CLIENT_SEEDS)
     hdr = (f"{'Rnd':>4}  "
            + "  ".join(f"s{s}avg" for s in CLIENT_SEEDS)
-           + f"  {'GlobalMean':>10}  {'HeldSR':>6}  {client_seed_hdr}")
+           + f"  {'XferMean':>10}  {'HeldSR':>6}  {client_seed_hdr}")
     print(hdr)
     print("-" * len(hdr))
 
@@ -176,20 +179,19 @@ def main():
         # --- Evaluation ---
         eval_str = ""
         if rnd % EVAL_EVERY == 0:
-            # Held-out seed
-            stats = server.evaluate(
-                seed=HELD_OUT_SEED, n_episodes=EVAL_EPISODES,
-                env_kwargs=env_kwargs, eval_eps=EVAL_EPS,
+            # Held-out seed — fine-tune FC on seed=7 with shared conv features
+            stats = server.transfer_evaluate(
+                seed=HELD_OUT_SEED, n_finetune=FINETUNE_EPISODES,
+                n_eval=EVAL_EPISODES, env_kwargs=env_kwargs,
+                agent_kwargs=agent_kwargs, eval_eps=EVAL_EPS,
             )
             eval_history.append((rnd, stats["mean_return"], stats["success_rate"]))
             eval_str = f"{stats['mean_return']:>+10.3f}  {stats['success_rate']:>5.0%}"
 
-            # Also evaluate global model on each client seed to diagnose
-            # whether aggregation is working at all
+            # Evaluate each client's local model (shared conv + per-client FC)
             client_sr = []
-            for s in CLIENT_SEEDS:
-                cs = server.evaluate(seed=s, n_episodes=10,
-                                     env_kwargs=env_kwargs, eval_eps=EVAL_EPS)
+            for client in clients:
+                cs = client.local_evaluate(n_episodes=10, eval_eps=EVAL_EPS)
                 client_sr.append(f"{cs['success_rate']:>4.0%}")
             eval_str += "  " + "  ".join(client_sr)
 
@@ -204,9 +206,9 @@ def main():
     server.save(final_path)
     print(f"\nFinal model saved: {final_path}")
 
-    final = server.evaluate(
-        seed=HELD_OUT_SEED, n_episodes=50,
-        env_kwargs=env_kwargs, eval_eps=EVAL_EPS,
+    final = server.transfer_evaluate(
+        seed=HELD_OUT_SEED, n_finetune=FINETUNE_EPISODES, n_eval=50,
+        env_kwargs=env_kwargs, agent_kwargs=agent_kwargs, eval_eps=EVAL_EPS,
     )
 
     # Cleanup
@@ -222,7 +224,7 @@ def main():
         f"rounds={FL_ROUNDS}  local_eps={LOCAL_EPISODES}  "
         f"clients={CLIENT_SEEDS}  held_out={HELD_OUT_SEED}",
         "",
-        "Global eval history on held-out seed:",
+        "Transfer eval history (conv init → fine-tune FC → eval) on held-out seed:",
     ]
     for rnd, mr, sr in eval_history:
         bar = "#" * int(sr * 20)

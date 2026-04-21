@@ -1,0 +1,19 @@
+====================================================================
+SUMMARY — Centralized DQN (upper bound)
+====================================================================
+seeds=[0, 42, 99]  held_out=7
+cycles=1500  total_eps=4500
+
+Eval history on held-out seed=7:
+  cycle= 150  mean_return=-1.978  success=0%  avg_len=200.0  [                    ]
+  cycle= 300  mean_return=-1.670  success=0%  avg_len=200.0  [                    ]
+  cycle= 450  mean_return=-2.320  success=0%  avg_len=200.0  [                    ]
+  cycle= 600  mean_return=-1.748  success=0%  avg_len=200.0  [                    ]
+  cycle= 750  mean_return=-2.070  success=0%  avg_len=200.0  [                    ]
+  cycle= 900  mean_return=-2.040  success=0%  avg_len=200.0  [                    ]
+  cycle=1050  mean_return=-1.778  success=0%  avg_len=200.0  [                    ]
+  cycle=1200  mean_return=-1.800  success=0%  avg_len=200.0  [                    ]
+  cycle=1350  mean_return=-1.615  success=0%  avg_len=200.0  [                    ]
+  cycle=1500  mean_return=-1.615  success=0%  avg_len=200.0  [                    ]
+
+Final 50-ep eval:  mean_return=-1.626  ±0.025  success_rate=0%  avg_ep_len=200.0

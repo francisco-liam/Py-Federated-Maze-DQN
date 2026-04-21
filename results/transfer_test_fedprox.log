@@ -1,0 +1,438 @@
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=0
+
+============================================================
+  FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)
+============================================================
+  Fine-tuning for 200 episodes on seed=7...
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   1/200  return=-1.75  eps=0.999  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   2/200  return=-2.10  eps=0.997  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   3/200  return=-2.05  eps=0.996  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   4/200  return=-2.00  eps=0.994  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   5/200  return=-2.25  eps=0.993  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   6/200  return=-2.30  eps=0.991  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   7/200  return=-2.00  eps=0.990  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   8/200  return=-2.25  eps=0.988  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep   9/200  return=-2.30  eps=0.987  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  10/200  return=-2.20  eps=0.985  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  11/200  return=-2.05  eps=0.984  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  12/200  return=-1.40  eps=0.982  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  13/200  return=-2.15  eps=0.981  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  14/200  return=-1.75  eps=0.979  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  15/200  return=-2.05  eps=0.978  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  16/200  return=-1.85  eps=0.976  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  17/200  return=-1.65  eps=0.975  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  18/200  return=-1.90  eps=0.973  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  19/200  return=-2.50  eps=0.972  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  20/200  return=-2.00  eps=0.970  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  21/200  return=-2.45  eps=0.969  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  22/200  return=-2.25  eps=0.967  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  23/200  return=-2.50  eps=0.966  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  24/200  return=-2.40  eps=0.964  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  25/200  return=-2.10  eps=0.963  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  26/200  return=-1.80  eps=0.961  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  27/200  return=-1.20  eps=0.960  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  28/200  return=-1.95  eps=0.958  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  29/200  return=-1.80  eps=0.957  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  30/200  return=-2.15  eps=0.955  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  31/200  return=-1.80  eps=0.954  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  32/200  return=-1.75  eps=0.952  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  33/200  return=-2.00  eps=0.951  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  34/200  return=-1.25  eps=0.949  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  35/200  return=-1.75  eps=0.948  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  36/200  return=-1.40  eps=0.946  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  37/200  return=-1.65  eps=0.945  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  38/200  return=-1.45  eps=0.943  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  39/200  return=-1.90  eps=0.942  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  40/200  return=-1.90  eps=0.940  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  41/200  return=-1.85  eps=0.939  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  42/200  return=-1.75  eps=0.937  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  43/200  return=-1.05  eps=0.935  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  44/200  return=-2.05  eps=0.934  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  45/200  return=-1.80  eps=0.932  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  46/200  return=-1.95  eps=0.931  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  47/200  return=-1.95  eps=0.929  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  48/200  return=-2.05  eps=0.928  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  49/200  return=-2.15  eps=0.926  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  50/200  return=-1.15  eps=0.925  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  51/200  return=-2.15  eps=0.923  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  52/200  return=-1.25  eps=0.922  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  53/200  return=-1.50  eps=0.920  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  54/200  return=-1.30  eps=0.919  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  55/200  return=-1.80  eps=0.917  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  56/200  return=-1.95  eps=0.916  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  57/200  return=-2.20  eps=0.914  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  58/200  return=-1.90  eps=0.913  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  59/200  return=-1.60  eps=0.911  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  60/200  return=-1.60  eps=0.910  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  61/200  return=-1.55  eps=0.908  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  62/200  return=-1.40  eps=0.907  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  63/200  return=-2.00  eps=0.905  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  64/200  return=-1.55  eps=0.904  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  65/200  return=-1.05  eps=0.902  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  66/200  return=-1.45  eps=0.901  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  67/200  return=-0.90  eps=0.899  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  68/200  return=-0.90  eps=0.898  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  69/200  return=-1.45  eps=0.896  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  70/200  return=-1.70  eps=0.895  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  71/200  return=-1.35  eps=0.893  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  72/200  return=-1.85  eps=0.892  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  73/200  return=-1.50  eps=0.890  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  74/200  return=-2.25  eps=0.889  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  75/200  return=-1.55  eps=0.887  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  76/200  return=-1.30  eps=0.886  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  77/200  return=-0.60  eps=0.885  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  78/200  return=-1.30  eps=0.883  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  79/200  return=-1.70  eps=0.881  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  80/200  return=-1.65  eps=0.880  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  81/200  return=-0.80  eps=0.878  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  82/200  return=-1.55  eps=0.877  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  83/200  return=-1.35  eps=0.875  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  84/200  return=-1.00  eps=0.874  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  85/200  return=-0.80  eps=0.873  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  86/200  return=-1.10  eps=0.871  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  87/200  return=-1.55  eps=0.869  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  88/200  return=-0.60  eps=0.868  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  89/200  return=-1.45  eps=0.867  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  90/200  return=-1.25  eps=0.865  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  91/200  return=-1.75  eps=0.863  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  92/200  return=-0.90  eps=0.862  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  93/200  return=-1.55  eps=0.861  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  94/200  return=-0.80  eps=0.859  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  95/200  return=-0.60  eps=0.858  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  96/200  return=-1.00  eps=0.856  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  97/200  return=-0.95  eps=0.855  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  98/200  return=-0.70  eps=0.853  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep  99/200  return=-1.60  eps=0.851  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 100/200  return=-1.15  eps=0.850  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 101/200  return=-0.85  eps=0.849  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 102/200  return=-1.15  eps=0.847  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 103/200  return=-1.05  eps=0.846  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 104/200  return=-1.10  eps=0.844  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 105/200  return=-0.75  eps=0.843  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 106/200  return=-0.75  eps=0.841  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 107/200  return=-0.70  eps=0.840  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 108/200  return=-0.65  eps=0.838  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 109/200  return=-0.70  eps=0.837  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 110/200  return=-1.65  eps=0.835  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 111/200  return=-0.75  eps=0.834  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 112/200  return=-0.60  eps=0.832  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 113/200  return=-0.90  eps=0.831  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 114/200  return=-1.35  eps=0.829  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 115/200  return=-0.75  eps=0.828  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 116/200  return=-0.70  eps=0.826  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 117/200  return=-0.45  eps=0.825  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 118/200  return=-0.75  eps=0.823  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 119/200  return=-0.65  eps=0.822  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 120/200  return=-0.50  eps=0.820  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 121/200  return=-0.70  eps=0.819  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 122/200  return=-0.85  eps=0.817  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 123/200  return=-0.75  eps=0.816  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 124/200  return=-1.00  eps=0.814  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 125/200  return=-0.55  eps=0.812  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 126/200  return=-0.60  eps=0.811  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 127/200  return=-1.15  eps=0.809  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 128/200  return=-1.05  eps=0.808  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 129/200  return=-0.60  eps=0.806  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 130/200  return=-0.65  eps=0.805  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 131/200  return=-0.80  eps=0.803  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 132/200  return=-1.30  eps=0.802  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 133/200  return=-0.55  eps=0.800  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 134/200  return=-0.75  eps=0.799  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 135/200  return=-0.85  eps=0.797  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 136/200  return=-0.65  eps=0.796  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 137/200  return=-0.90  eps=0.794  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 138/200  return=-0.75  eps=0.793  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 139/200  return=-0.55  eps=0.791  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 140/200  return=-0.60  eps=0.790  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 141/200  return=-1.00  eps=0.788  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 142/200  return=-1.15  eps=0.787  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 143/200  return=-0.35  eps=0.785  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 144/200  return=-0.55  eps=0.784  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 145/200  return=-0.55  eps=0.782  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 146/200  return=-1.20  eps=0.781  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 147/200  return=-0.95  eps=0.779  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 148/200  return=-0.95  eps=0.778  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 149/200  return=-0.70  eps=0.776  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 150/200  return=-0.45  eps=0.775  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 151/200  return=-0.45  eps=0.774  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 152/200  return=-0.65  eps=0.772  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 153/200  return=-0.40  eps=0.770  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 154/200  return=-0.30  eps=0.769  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 155/200  return=-0.50  eps=0.767  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 156/200  return=-0.40  eps=0.766  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 157/200  return=-0.40  eps=0.764  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 158/200  return=-0.40  eps=0.763  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 159/200  return=-0.50  eps=0.761  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 160/200  return=-0.45  eps=0.760  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 161/200  return=-0.35  eps=0.758  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 162/200  return=-0.60  eps=0.757  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 163/200  return=-0.40  eps=0.756  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 164/200  return=-0.40  eps=0.754  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 165/200  return=-0.40  eps=0.752  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 166/200  return=-0.40  eps=0.751  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 167/200  return=-0.45  eps=0.750  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 168/200  return=-0.45  eps=0.748  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 169/200  return=-0.40  eps=0.746  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 170/200  return=-0.35  eps=0.745  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 171/200  return=-0.45  eps=0.744  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 172/200  return=-0.55  eps=0.742  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 173/200  return=-0.45  eps=0.740  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 174/200  return=-0.30  eps=0.739  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 175/200  return=-0.25  eps=0.738  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 176/200  return=-0.50  eps=0.736  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 177/200  return=-1.45  eps=0.734  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 178/200  return=-0.40  eps=0.733  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 179/200  return=-1.90  eps=0.732  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 180/200  return=-0.75  eps=0.730  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 181/200  return=-0.30  eps=0.728  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 182/200  return=-1.25  eps=0.727  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 183/200  return=-0.15  eps=0.726  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 184/200  return=-0.20  eps=0.724  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 185/200  return=-0.35  eps=0.722  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 186/200  return=-1.45  eps=0.721  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 187/200  return=-0.20  eps=0.720  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 188/200  return=-0.20  eps=0.718  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 189/200  return=-0.25  eps=0.716  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 190/200  return=-0.30  eps=0.715  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 191/200  return=-0.00  eps=0.714  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 192/200  return=-0.20  eps=0.712  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 193/200  return=+0.10  eps=0.711  SUCCESS
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 194/200  return=+0.20  eps=0.709  SUCCESS
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 195/200  return=-0.25  eps=0.708  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 196/200  return=+0.10  eps=0.706  SUCCESS
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 197/200  return=-0.25  eps=0.705  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 198/200  return=-0.00  eps=0.703  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 199/200  return=-0.05  eps=0.702  
+  [FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)] ep 200/200  return=-0.75  eps=0.700  
+
+  Fine-tune success rate: 2%
+  Evaluating for 50 episodes...
+
+============================================================
+  Random init
+============================================================
+  Fine-tuning for 200 episodes on seed=7...
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [Random init] ep   1/200  return=-1.90  eps=0.999  
+  [Random init] ep   2/200  return=-2.40  eps=0.997  
+  [Random init] ep   3/200  return=-1.95  eps=0.996  
+  [Random init] ep   4/200  return=-2.35  eps=0.994  
+  [Random init] ep   5/200  return=-2.20  eps=0.993  
+  [Random init] ep   6/200  return=-1.95  eps=0.991  
+  [Random init] ep   7/200  return=-2.20  eps=0.990  
+  [Random init] ep   8/200  return=-1.90  eps=0.988  
+  [Random init] ep   9/200  return=-2.50  eps=0.987  
+  [Random init] ep  10/200  return=-1.90  eps=0.985  
+  [Random init] ep  11/200  return=-2.30  eps=0.984  
+  [Random init] ep  12/200  return=-1.70  eps=0.982  
+  [Random init] ep  13/200  return=-2.10  eps=0.981  
+  [Random init] ep  14/200  return=-2.10  eps=0.979  
+  [Random init] ep  15/200  return=-2.20  eps=0.978  
+  [Random init] ep  16/200  return=-1.45  eps=0.976  
+  [Random init] ep  17/200  return=-2.05  eps=0.975  
+  [Random init] ep  18/200  return=-2.50  eps=0.973  
+  [Random init] ep  19/200  return=-1.65  eps=0.972  
+  [Random init] ep  20/200  return=-1.90  eps=0.970  
+  [Random init] ep  21/200  return=-1.85  eps=0.969  
+  [Random init] ep  22/200  return=-1.70  eps=0.967  
+  [Random init] ep  23/200  return=-2.25  eps=0.966  
+  [Random init] ep  24/200  return=-2.50  eps=0.964  
+  [Random init] ep  25/200  return=-2.20  eps=0.963  
+  [Random init] ep  26/200  return=-1.70  eps=0.961  
+  [Random init] ep  27/200  return=-2.20  eps=0.960  
+  [Random init] ep  28/200  return=-1.90  eps=0.958  
+  [Random init] ep  29/200  return=-2.30  eps=0.957  
+  [Random init] ep  30/200  return=-0.90  eps=0.955  
+  [Random init] ep  31/200  return=-2.25  eps=0.954  
+  [Random init] ep  32/200  return=-1.85  eps=0.952  
+  [Random init] ep  33/200  return=-1.75  eps=0.951  
+  [Random init] ep  34/200  return=-2.15  eps=0.949  
+  [Random init] ep  35/200  return=-1.75  eps=0.948  
+  [Random init] ep  36/200  return=-1.85  eps=0.946  
+  [Random init] ep  37/200  return=-1.40  eps=0.945  
+  [Random init] ep  38/200  return=-2.40  eps=0.943  
+  [Random init] ep  39/200  return=-1.65  eps=0.942  
+  [Random init] ep  40/200  return=-1.95  eps=0.940  
+  [Random init] ep  41/200  return=-1.95  eps=0.939  
+  [Random init] ep  42/200  return=-2.15  eps=0.937  
+  [Random init] ep  43/200  return=-1.60  eps=0.935  
+  [Random init] ep  44/200  return=-1.50  eps=0.934  
+  [Random init] ep  45/200  return=-2.50  eps=0.932  
+  [Random init] ep  46/200  return=-0.90  eps=0.931  
+  [Random init] ep  47/200  return=-1.95  eps=0.929  
+  [Random init] ep  48/200  return=-1.60  eps=0.928  
+  [Random init] ep  49/200  return=-1.20  eps=0.926  
+  [Random init] ep  50/200  return=-1.20  eps=0.925  
+  [Random init] ep  51/200  return=-1.95  eps=0.923  
+  [Random init] ep  52/200  return=-2.20  eps=0.922  
+  [Random init] ep  53/200  return=-2.40  eps=0.920  
+  [Random init] ep  54/200  return=-1.55  eps=0.919  
+  [Random init] ep  55/200  return=-1.10  eps=0.917  
+  [Random init] ep  56/200  return=-1.55  eps=0.916  
+  [Random init] ep  57/200  return=-1.30  eps=0.914  
+  [Random init] ep  58/200  return=-1.60  eps=0.913  
+  [Random init] ep  59/200  return=-1.20  eps=0.911  
+  [Random init] ep  60/200  return=-1.35  eps=0.910  
+  [Random init] ep  61/200  return=-1.15  eps=0.908  
+  [Random init] ep  62/200  return=-1.75  eps=0.907  
+  [Random init] ep  63/200  return=-1.45  eps=0.905  
+  [Random init] ep  64/200  return=-1.45  eps=0.904  
+  [Random init] ep  65/200  return=-1.95  eps=0.902  
+  [Random init] ep  66/200  return=-1.50  eps=0.901  
+  [Random init] ep  67/200  return=-1.15  eps=0.899  
+  [Random init] ep  68/200  return=-2.25  eps=0.898  
+  [Random init] ep  69/200  return=-0.85  eps=0.896  
+  [Random init] ep  70/200  return=-1.80  eps=0.895  
+  [Random init] ep  71/200  return=-1.50  eps=0.893  
+  [Random init] ep  72/200  return=-1.05  eps=0.892  
+  [Random init] ep  73/200  return=-1.45  eps=0.890  
+  [Random init] ep  74/200  return=-2.30  eps=0.889  
+  [Random init] ep  75/200  return=-1.65  eps=0.887  
+  [Random init] ep  76/200  return=-1.10  eps=0.886  
+  [Random init] ep  77/200  return=-1.40  eps=0.885  
+  [Random init] ep  78/200  return=-0.95  eps=0.883  
+  [Random init] ep  79/200  return=-1.50  eps=0.881  
+  [Random init] ep  80/200  return=-1.25  eps=0.880  
+  [Random init] ep  81/200  return=-2.35  eps=0.878  
+  [Random init] ep  82/200  return=-0.75  eps=0.877  
+  [Random init] ep  83/200  return=-1.15  eps=0.875  
+  [Random init] ep  84/200  return=-0.65  eps=0.874  
+  [Random init] ep  85/200  return=-0.95  eps=0.873  
+  [Random init] ep  86/200  return=-1.85  eps=0.871  
+  [Random init] ep  87/200  return=-0.65  eps=0.869  
+  [Random init] ep  88/200  return=-1.55  eps=0.868  
+  [Random init] ep  89/200  return=-1.30  eps=0.867  
+  [Random init] ep  90/200  return=-1.20  eps=0.865  
+  [Random init] ep  91/200  return=-1.30  eps=0.863  
+  [Random init] ep  92/200  return=-0.75  eps=0.862  
+  [Random init] ep  93/200  return=-1.20  eps=0.861  
+  [Random init] ep  94/200  return=-0.70  eps=0.859  
+  [Random init] ep  95/200  return=-1.60  eps=0.858  
+  [Random init] ep  96/200  return=-0.40  eps=0.856  
+  [Random init] ep  97/200  return=-0.65  eps=0.855  
+  [Random init] ep  98/200  return=-1.10  eps=0.853  
+  [Random init] ep  99/200  return=-0.90  eps=0.851  
+  [Random init] ep 100/200  return=-0.70  eps=0.850  
+  [Random init] ep 101/200  return=-0.35  eps=0.849  
+  [Random init] ep 102/200  return=-1.25  eps=0.847  
+  [Random init] ep 103/200  return=-0.65  eps=0.846  
+  [Random init] ep 104/200  return=-0.70  eps=0.844  
+  [Random init] ep 105/200  return=-1.15  eps=0.843  
+  [Random init] ep 106/200  return=-1.00  eps=0.841  
+  [Random init] ep 107/200  return=-1.00  eps=0.840  
+  [Random init] ep 108/200  return=-0.95  eps=0.838  
+  [Random init] ep 109/200  return=-1.00  eps=0.837  
+  [Random init] ep 110/200  return=-1.35  eps=0.835  
+  [Random init] ep 111/200  return=-0.65  eps=0.834  
+  [Random init] ep 112/200  return=-1.50  eps=0.832  
+  [Random init] ep 113/200  return=-0.65  eps=0.831  
+  [Random init] ep 114/200  return=-1.05  eps=0.829  
+  [Random init] ep 115/200  return=-0.60  eps=0.828  
+  [Random init] ep 116/200  return=-0.60  eps=0.826  
+  [Random init] ep 117/200  return=-1.10  eps=0.825  
+  [Random init] ep 118/200  return=-0.90  eps=0.823  
+  [Random init] ep 119/200  return=-1.40  eps=0.822  
+  [Random init] ep 120/200  return=-0.65  eps=0.820  
+  [Random init] ep 121/200  return=-1.45  eps=0.819  
+  [Random init] ep 122/200  return=-1.05  eps=0.817  
+  [Random init] ep 123/200  return=-1.00  eps=0.816  
+  [Random init] ep 124/200  return=-0.60  eps=0.814  
+  [Random init] ep 125/200  return=-0.70  eps=0.812  
+  [Random init] ep 126/200  return=-0.75  eps=0.811  
+  [Random init] ep 127/200  return=-0.70  eps=0.809  
+  [Random init] ep 128/200  return=-0.55  eps=0.808  
+  [Random init] ep 129/200  return=-0.50  eps=0.806  
+  [Random init] ep 130/200  return=-1.15  eps=0.805  
+  [Random init] ep 131/200  return=-0.70  eps=0.803  
+  [Random init] ep 132/200  return=-0.60  eps=0.802  
+  [Random init] ep 133/200  return=-0.70  eps=0.800  
+  [Random init] ep 134/200  return=-0.75  eps=0.799  
+  [Random init] ep 135/200  return=-1.45  eps=0.797  
+  [Random init] ep 136/200  return=-0.50  eps=0.796  
+  [Random init] ep 137/200  return=-0.45  eps=0.794  
+  [Random init] ep 138/200  return=-0.55  eps=0.793  
+  [Random init] ep 139/200  return=-0.55  eps=0.791  
+  [Random init] ep 140/200  return=-0.80  eps=0.790  
+  [Random init] ep 141/200  return=-0.85  eps=0.788  
+  [Random init] ep 142/200  return=-0.65  eps=0.787  
+  [Random init] ep 143/200  return=-0.60  eps=0.785  
+  [Random init] ep 144/200  return=-0.65  eps=0.784  
+  [Random init] ep 145/200  return=-0.55  eps=0.782  
+  [Random init] ep 146/200  return=-1.15  eps=0.781  
+  [Random init] ep 147/200  return=-0.45  eps=0.779  
+  [Random init] ep 148/200  return=-0.45  eps=0.778  
+  [Random init] ep 149/200  return=-0.75  eps=0.776  
+  [Random init] ep 150/200  return=-0.65  eps=0.775  
+  [Random init] ep 151/200  return=-0.55  eps=0.774  
+  [Random init] ep 152/200  return=-0.45  eps=0.772  
+  [Random init] ep 153/200  return=-0.55  eps=0.770  
+  [Random init] ep 154/200  return=-0.45  eps=0.769  
+  [Random init] ep 155/200  return=-0.35  eps=0.767  
+  [Random init] ep 156/200  return=-0.80  eps=0.766  
+  [Random init] ep 157/200  return=-0.40  eps=0.764  
+  [Random init] ep 158/200  return=-1.10  eps=0.763  
+  [Random init] ep 159/200  return=-0.45  eps=0.761  
+  [Random init] ep 160/200  return=-0.45  eps=0.760  
+  [Random init] ep 161/200  return=-0.35  eps=0.758  
+  [Random init] ep 162/200  return=-0.35  eps=0.757  
+  [Random init] ep 163/200  return=-0.55  eps=0.756  
+  [Random init] ep 164/200  return=-1.30  eps=0.754  
+  [Random init] ep 165/200  return=-0.55  eps=0.752  
+  [Random init] ep 166/200  return=-0.40  eps=0.751  
+  [Random init] ep 167/200  return=-0.50  eps=0.750  
+  [Random init] ep 168/200  return=-1.20  eps=0.748  
+  [Random init] ep 169/200  return=-0.35  eps=0.746  
+  [Random init] ep 170/200  return=-0.45  eps=0.745  
+  [Random init] ep 171/200  return=-0.45  eps=0.744  
+  [Random init] ep 172/200  return=-0.50  eps=0.742  
+  [Random init] ep 173/200  return=-0.55  eps=0.740  
+  [Random init] ep 174/200  return=-0.35  eps=0.739  
+  [Random init] ep 175/200  return=-0.45  eps=0.738  
+  [Random init] ep 176/200  return=-0.25  eps=0.736  
+  [Random init] ep 177/200  return=-0.35  eps=0.734  
+  [Random init] ep 178/200  return=-0.25  eps=0.733  
+  [Random init] ep 179/200  return=-0.35  eps=0.732  
+  [Random init] ep 180/200  return=-0.40  eps=0.730  
+  [Random init] ep 181/200  return=-0.40  eps=0.728  
+  [Random init] ep 182/200  return=-0.30  eps=0.727  
+  [Random init] ep 183/200  return=-0.35  eps=0.726  
+  [Random init] ep 184/200  return=-0.55  eps=0.724  
+  [Random init] ep 185/200  return=-0.75  eps=0.722  
+  [Random init] ep 186/200  return=-0.30  eps=0.721  
+  [Random init] ep 187/200  return=-0.35  eps=0.720  
+  [Random init] ep 188/200  return=-0.75  eps=0.718  
+  [Random init] ep 189/200  return=-0.35  eps=0.716  
+  [Random init] ep 190/200  return=-0.25  eps=0.715  
+  [Random init] ep 191/200  return=-0.30  eps=0.714  
+  [Random init] ep 192/200  return=-0.60  eps=0.712  
+  [Random init] ep 193/200  return=-0.15  eps=0.711  
+  [Random init] ep 194/200  return=-0.35  eps=0.709  
+  [Random init] ep 195/200  return=-0.05  eps=0.708  
+  [Random init] ep 196/200  return=-0.25  eps=0.706  
+  [Random init] ep 197/200  return=-0.20  eps=0.705  
+  [Random init] ep 198/200  return=-0.00  eps=0.703  
+  [Random init] ep 199/200  return=-0.25  eps=0.702  
+  [Random init] ep 200/200  return=-0.40  eps=0.700  
+
+  Fine-tune success rate: 0%
+  Evaluating for 50 episodes...
+
+============================================================
+  TRANSFER TEST SUMMARY
+  seed=7  fine-tune=200 eps  eval=50 eps
+============================================================
+  FL conv init (checkpoints/fl_fedprox_mu0.1_eqw_final.pt)
+    fine-tune SR : 2%
+    eval SR      : 100%
+    eval return  : +0.121 ± 0.066
+
+  Random init
+    fine-tune SR : 0%
+    eval SR      : 68%
+    eval return  : -0.386 ± 0.724
+
+  Δ success_rate (FL − random): +32%
+  Δ mean_return  (FL − random): +0.507
+============================================================
+

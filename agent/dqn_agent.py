@@ -97,13 +97,17 @@ class DQNAgent:
 
     def load_global_weights(self, state_dict: dict) -> None:
         """
-        Load server weights into both online and target networks and reset
-        the optimizer.  The replay buffer, step counters, and epsilon schedule
-        are preserved — clients should become less exploratory over rounds,
-        not reset to random on every weight sync.
+        Load only the convolutional layers from the server's global state dict
+        into both online and target networks (partial parameter sharing).
+        FC layers are kept as-is so each client retains its own Q-value scale.
+        The replay buffer, step counters, and epsilon schedule are preserved.
         """
-        self.online_net.load_state_dict(state_dict)
-        self.target_net.load_state_dict(state_dict)
+        current = self.online_net.state_dict()
+        for k, v in state_dict.items():
+            if k.startswith("conv."):
+                current[k] = v
+        self.online_net.load_state_dict(current)
+        self.target_net.load_state_dict(self.online_net.state_dict())
         self.optimizer = optim.Adam(self.online_net.parameters(), lr=self._lr)
 
     def set_proximal_term(self, global_state_dict: dict, mu: float) -> None:

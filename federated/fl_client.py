@@ -12,6 +12,7 @@ Each round:
 from typing import Optional
 
 import numpy as np
+import torch
 
 from agent import DQNAgent
 from maze_env import MazeEnv
@@ -95,6 +96,36 @@ class FLClient:
             self.agent.get_online_weights(),
             self.agent.steps_done - steps_start,
             ep_returns,
+        )
+
+    def local_evaluate(self, n_episodes: int, eval_eps: float = 0.05) -> dict:
+        """
+        Evaluate the client's current local model (shared conv + local FC)
+        on its own maze. Resets the env state for the next train_round.
+        """
+        returns = []
+        successes = 0
+        with torch.no_grad():
+            for _ in range(n_episodes):
+                obs = self.env.reset()
+                ep_r, done = 0.0, False
+                while not done:
+                    if np.random.rand() < eval_eps:
+                        action = np.random.randint(self.agent.n_actions)
+                    else:
+                        obs_t = torch.as_tensor(
+                            obs, dtype=torch.float32, device=self.agent.device
+                        ).unsqueeze(0)
+                        action = int(self.agent.online_net(obs_t).argmax(dim=1).item())
+                    obs, reward, done = self.env.step(action)
+                    ep_r += reward
+                returns.append(ep_r)
+                if ep_r > 0:
+                    successes += 1
+        self._obs = self.env.reset()
+        return dict(
+            mean_return  = float(np.mean(returns)),
+            success_rate = successes / n_episodes,
         )
 
     def close(self) -> None:

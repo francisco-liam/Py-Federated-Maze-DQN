@@ -1,0 +1,19 @@
+====================================================================
+SUMMARY
+====================================================================
+method=FedAvg  mu=0.0
+rounds=50  local_eps=30  clients=[0, 42, 99]  held_out=7
+
+Transfer eval history (conv init → fine-tune FC → eval) on held-out seed:
+  round=  5  mean_return=-0.643  success=0%  [                    ]
+  round= 10  mean_return=-0.870  success=0%  [                    ]
+  round= 15  mean_return=-0.705  success=0%  [                    ]
+  round= 20  mean_return=-0.700  success=0%  [                    ]
+  round= 25  mean_return=-0.775  success=0%  [                    ]
+  round= 30  mean_return=-0.625  success=0%  [                    ]
+  round= 35  mean_return=-0.700  success=0%  [                    ]
+  round= 40  mean_return=-0.708  success=0%  [                    ]
+  round= 45  mean_return=-0.655  success=0%  [                    ]
+  round= 50  mean_return=-0.700  success=0%  [                    ]
+
+Final 50-ep eval:  mean_return=-1.149  ±0.397  success_rate=0%

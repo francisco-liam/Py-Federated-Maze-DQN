@@ -1,0 +1,227 @@
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=0
+====================================================================
+  Local-only DQN — no parameter sharing (lower bound)
+  Seeds: [0, 42, 99]   Held-out: seed 7
+  Episodes per agent: 1500   Device: cuda
+  obs_shape=(5, 40, 40)
+====================================================================
+
+====================================================================
+  Training agent  seed=0
+====================================================================
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=0
+  [seed=0] ep   50/1500  avg50=-1.90  eps=0.925
+  [seed=0] ep  100/1500  avg50=-1.44  eps=0.850
+  [seed=0] ep  150/1500  avg50=-0.90  eps=0.775
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=150  held_out_return=-1.290  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep  200/1500  avg50=-0.42  eps=0.700
+  [seed=0] ep  250/1500  avg50=+0.18  eps=0.625
+  [seed=0] ep  300/1500  avg50=+0.65  eps=0.550
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=300  held_out_return=-1.450  held_out_SR=10%  avg_len=200.0
+  [seed=0] ep  350/1500  avg50=+1.07  eps=0.475
+  [seed=0] ep  400/1500  avg50=+1.67  eps=0.400
+  [seed=0] ep  450/1500  avg50=+1.91  eps=0.325
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=450  held_out_return=-0.750  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep  500/1500  avg50=+2.40  eps=0.250
+  [seed=0] ep  550/1500  avg50=+2.76  eps=0.175
+  [seed=0] ep  600/1500  avg50=+3.36  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=600  held_out_return=-1.140  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep  650/1500  avg50=+4.84  eps=0.100
+  [seed=0] ep  700/1500  avg50=+4.06  eps=0.100
+  [seed=0] ep  750/1500  avg50=+4.65  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=750  held_out_return=-1.543  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep  800/1500  avg50=+3.75  eps=0.100
+  [seed=0] ep  850/1500  avg50=+4.11  eps=0.100
+  [seed=0] ep  900/1500  avg50=+4.65  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=900  held_out_return=-1.535  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep  950/1500  avg50=+3.36  eps=0.100
+  [seed=0] ep 1000/1500  avg50=+3.93  eps=0.100
+  [seed=0] ep 1050/1500  avg50=+4.19  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=1050  held_out_return=-1.773  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep 1100/1500  avg50=+3.70  eps=0.100
+  [seed=0] ep 1150/1500  avg50=+1.73  eps=0.100
+  [seed=0] ep 1200/1500  avg50=+4.53  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=1200  held_out_return=-1.558  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep 1250/1500  avg50=+3.91  eps=0.100
+  [seed=0] ep 1300/1500  avg50=+3.10  eps=0.100
+  [seed=0] ep 1350/1500  avg50=+3.67  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=1350  held_out_return=-1.528  held_out_SR=0%  avg_len=200.0
+  [seed=0] ep 1400/1500  avg50=+3.63  eps=0.100
+  [seed=0] ep 1450/1500  avg50=+5.21  eps=0.100
+  [seed=0] ep 1500/1500  avg50=+4.63  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=0] EVAL ep=1500  held_out_return=-1.523  held_out_SR=0%  avg_len=200.0
+  Saved: checkpoints/local_seed0_final.pt
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+
+====================================================================
+  Training agent  seed=42
+====================================================================
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=42
+  [seed=42] ep   50/1500  avg50=-2.05  eps=0.925
+  [seed=42] ep  100/1500  avg50=-1.69  eps=0.850
+  [seed=42] ep  150/1500  avg50=-1.32  eps=0.775
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=150  held_out_return=-2.453  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep  200/1500  avg50=-0.71  eps=0.700
+  [seed=42] ep  250/1500  avg50=-0.25  eps=0.625
+  [seed=42] ep  300/1500  avg50=+0.38  eps=0.550
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=300  held_out_return=-2.410  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep  350/1500  avg50=+0.74  eps=0.475
+  [seed=42] ep  400/1500  avg50=+1.17  eps=0.400
+  [seed=42] ep  450/1500  avg50=+1.74  eps=0.325
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=450  held_out_return=-2.255  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep  500/1500  avg50=+2.47  eps=0.250
+  [seed=42] ep  550/1500  avg50=+2.28  eps=0.175
+  [seed=42] ep  600/1500  avg50=+3.43  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=600  held_out_return=-2.053  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep  650/1500  avg50=+3.30  eps=0.100
+  [seed=42] ep  700/1500  avg50=+3.50  eps=0.100
+  [seed=42] ep  750/1500  avg50=+2.28  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=750  held_out_return=-2.028  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep  800/1500  avg50=+4.01  eps=0.100
+  [seed=42] ep  850/1500  avg50=+2.58  eps=0.100
+  [seed=42] ep  900/1500  avg50=+2.66  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=900  held_out_return=-2.040  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep  950/1500  avg50=+3.04  eps=0.100
+  [seed=42] ep 1000/1500  avg50=+3.77  eps=0.100
+  [seed=42] ep 1050/1500  avg50=+4.52  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=1050  held_out_return=-2.165  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep 1100/1500  avg50=+4.22  eps=0.100
+  [seed=42] ep 1150/1500  avg50=+5.09  eps=0.100
+  [seed=42] ep 1200/1500  avg50=+3.99  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=1200  held_out_return=-2.088  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep 1250/1500  avg50=+3.78  eps=0.100
+  [seed=42] ep 1300/1500  avg50=+3.99  eps=0.100
+  [seed=42] ep 1350/1500  avg50=+3.47  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=1350  held_out_return=-2.078  held_out_SR=0%  avg_len=200.0
+  [seed=42] ep 1400/1500  avg50=+4.65  eps=0.100
+  [seed=42] ep 1450/1500  avg50=+4.40  eps=0.100
+  [seed=42] ep 1500/1500  avg50=+3.67  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=42] EVAL ep=1500  held_out_return=-2.068  held_out_SR=0%  avg_len=200.0
+  Saved: checkpoints/local_seed42_final.pt
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+
+====================================================================
+  Training agent  seed=99
+====================================================================
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=99
+  [seed=99] ep   50/1500  avg50=-1.97  eps=0.925
+  [seed=99] ep  100/1500  avg50=-1.56  eps=0.850
+  [seed=99] ep  150/1500  avg50=-1.00  eps=0.775
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=150  held_out_return=-1.323  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep  200/1500  avg50=-0.29  eps=0.700
+  [seed=99] ep  250/1500  avg50=+0.36  eps=0.625
+  [seed=99] ep  300/1500  avg50=+1.14  eps=0.550
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=300  held_out_return=-1.750  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep  350/1500  avg50=+1.63  eps=0.475
+  [seed=99] ep  400/1500  avg50=+2.32  eps=0.400
+  [seed=99] ep  450/1500  avg50=+2.78  eps=0.325
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=450  held_out_return=-2.313  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep  500/1500  avg50=+3.30  eps=0.250
+  [seed=99] ep  550/1500  avg50=+4.18  eps=0.176
+  [seed=99] ep  600/1500  avg50=+3.19  eps=0.102
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=600  held_out_return=-2.413  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep  650/1500  avg50=+4.66  eps=0.100
+  [seed=99] ep  700/1500  avg50=+4.70  eps=0.100
+  [seed=99] ep  750/1500  avg50=+4.77  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=750  held_out_return=-2.295  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep  800/1500  avg50=+4.72  eps=0.100
+  [seed=99] ep  850/1500  avg50=+5.05  eps=0.100
+  [seed=99] ep  900/1500  avg50=+5.20  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=900  held_out_return=-2.000  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep  950/1500  avg50=+5.62  eps=0.100
+  [seed=99] ep 1000/1500  avg50=+5.93  eps=0.100
+  [seed=99] ep 1050/1500  avg50=+5.88  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=1050  held_out_return=-2.325  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep 1100/1500  avg50=+5.85  eps=0.100
+  [seed=99] ep 1150/1500  avg50=+5.28  eps=0.100
+  [seed=99] ep 1200/1500  avg50=+5.70  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=1200  held_out_return=-2.453  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep 1250/1500  avg50=+5.41  eps=0.100
+  [seed=99] ep 1300/1500  avg50=+5.71  eps=0.100
+  [seed=99] ep 1350/1500  avg50=+5.75  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=1350  held_out_return=-2.453  held_out_SR=0%  avg_len=200.0
+  [seed=99] ep 1400/1500  avg50=+5.67  eps=0.100
+  [seed=99] ep 1450/1500  avg50=+5.65  eps=0.100
+  [seed=99] ep 1500/1500  avg50=+5.84  eps=0.100
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+  [seed=99] EVAL ep=1500  held_out_return=-2.345  held_out_SR=0%  avg_len=200.0
+  Saved: checkpoints/local_seed99_final.pt
+[MazeGen] Attempt 1/30 PASS — obstacles=0/0  seed=7
+
+====================================================================
+SUMMARY — Local-only DQN (lower bound, no sharing)
+====================================================================
+seeds=[0, 42, 99]  held_out=7
+episodes_per_agent=1500
+
+  Agent seed=0 — eval history on held-out seed=7:
+    ep= 150  mean_return=-1.290  success=0%  avg_len=200.0  [                    ]
+    ep= 300  mean_return=-1.450  success=10%  avg_len=200.0  [##                  ]
+    ep= 450  mean_return=-0.750  success=0%  avg_len=200.0  [                    ]
+    ep= 600  mean_return=-1.140  success=0%  avg_len=200.0  [                    ]
+    ep= 750  mean_return=-1.543  success=0%  avg_len=200.0  [                    ]
+    ep= 900  mean_return=-1.535  success=0%  avg_len=200.0  [                    ]
+    ep=1050  mean_return=-1.773  success=0%  avg_len=200.0  [                    ]
+    ep=1200  mean_return=-1.558  success=0%  avg_len=200.0  [                    ]
+    ep=1350  mean_return=-1.528  success=0%  avg_len=200.0  [                    ]
+    ep=1500  mean_return=-1.523  success=0%  avg_len=200.0  [                    ]
+  Final 50-ep:  mean_return=-1.556  ±0.137  success_rate=0%  avg_ep_len=200.0
+
+  Agent seed=42 — eval history on held-out seed=7:
+    ep= 150  mean_return=-2.453  success=0%  avg_len=200.0  [                    ]
+    ep= 300  mean_return=-2.410  success=0%  avg_len=200.0  [                    ]
+    ep= 450  mean_return=-2.255  success=0%  avg_len=200.0  [                    ]
+    ep= 600  mean_return=-2.053  success=0%  avg_len=200.0  [                    ]
+    ep= 750  mean_return=-2.028  success=0%  avg_len=200.0  [                    ]
+    ep= 900  mean_return=-2.040  success=0%  avg_len=200.0  [                    ]
+    ep=1050  mean_return=-2.165  success=0%  avg_len=200.0  [                    ]
+    ep=1200  mean_return=-2.088  success=0%  avg_len=200.0  [                    ]
+    ep=1350  mean_return=-2.078  success=0%  avg_len=200.0  [                    ]
+    ep=1500  mean_return=-2.068  success=0%  avg_len=200.0  [                    ]
+  Final 50-ep:  mean_return=-2.069  ±0.042  success_rate=0%  avg_ep_len=200.0
+
+  Agent seed=99 — eval history on held-out seed=7:
+    ep= 150  mean_return=-1.323  success=0%  avg_len=200.0  [                    ]
+    ep= 300  mean_return=-1.750  success=0%  avg_len=200.0  [                    ]
+    ep= 450  mean_return=-2.313  success=0%  avg_len=200.0  [                    ]
+    ep= 600  mean_return=-2.413  success=0%  avg_len=200.0  [                    ]
+    ep= 750  mean_return=-2.295  success=0%  avg_len=200.0  [                    ]
+    ep= 900  mean_return=-2.000  success=0%  avg_len=200.0  [                    ]
+    ep=1050  mean_return=-2.325  success=0%  avg_len=200.0  [                    ]
+    ep=1200  mean_return=-2.453  success=0%  avg_len=200.0  [                    ]
+    ep=1350  mean_return=-2.453  success=0%  avg_len=200.0  [                    ]
+    ep=1500  mean_return=-2.345  success=0%  avg_len=200.0  [                    ]
+  Final 50-ep:  mean_return=-2.342  ±0.461  success_rate=0%  avg_ep_len=200.0
+
+  Mean across agents:  success_rate=0%  mean_return=-1.989  avg_ep_len=200.0
+
+Summary saved to checkpoints/summary_local_only.txt
