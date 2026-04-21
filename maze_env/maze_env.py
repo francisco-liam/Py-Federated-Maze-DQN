@@ -21,6 +21,7 @@ Action mapping (matches MazeAction enum):
   0 = NoOp  |  1 = Up  |  2 = Left  |  3 = Down  |  4 = Right
 """
 
+from collections import deque
 from typing import List, Optional, Tuple
 
 import numpy as np
@@ -34,10 +35,43 @@ Pos = Tuple[int, int]
 # ------------------------------------------------------------------
 # Observation constants (match MazeAgent.cs)
 # ------------------------------------------------------------------
-_HALF_VIEW      = 2
-_VIEW_SIZE      = 2 * _HALF_VIEW + 1          # 5
-_GRID_OBS_COUNT = _VIEW_SIZE * _VIEW_SIZE      # 25
-_OBS_SIZE       = _GRID_OBS_COUNT + 1          # 26
+_HALF_VIEW = 2
+_VIEW_SIZE = 2 * _HALF_VIEW + 1   # 5
+
+# Greyscale pixel values for the egocentric observation frame [0.0, 1.0]
+_PX_OCCLUDED = 0.00   # cell hidden behind a wall
+_PX_WALL     = 0.25   # visible wall
+_PX_FLOOR    = 0.70   # open floor
+_PX_OBSTACLE = 0.55   # moving hazard
+_PX_EXIT     = 0.85   # goal cell
+_PX_PLAYER   = 1.00   # agent's own cell
+
+
+def _bresenham_between(x0: int, y0: int, x1: int, y1: int) -> list:
+    """
+    Return a list of grid cells strictly between (x0, y0) and (x1, y1)
+    following Bresenham's line algorithm.  Neither endpoint is included.
+    """
+    cells = []
+    dx = abs(x1 - x0)
+    dy = abs(y1 - y0)
+    sx = 1 if x1 > x0 else -1
+    sy = 1 if y1 > y0 else -1
+    err = dx - dy
+    x, y = x0, y0
+    while True:
+        e2 = 2 * err
+        if e2 > -dy:
+            err -= dy
+            x += sx
+        if e2 < dx:
+            err += dx
+            y += sy
+        if (x, y) == (x1, y1):
+            break
+        cells.append((x, y))
+    return cells
+
 
 # Action → (dx, dy) deltas in grid space (y-up)
 _DELTAS: dict = {
@@ -105,7 +139,6 @@ class MazeEnv:
         Pixel size of each grid cell when rendering.
     """
 
-    obs_size  = _OBS_SIZE
     n_actions = 5
 
     def __init__(
@@ -128,6 +161,9 @@ class MazeEnv:
         death_penalty:                  float = -1.0,
         step_penalty:                   float = -0.01,
         timeout_penalty:                float = -0.5,
+        shaping_scale:                  float = 0.05,
+        n_stack:                        int   = 4,
+        cell_obs_px:                    int   = 8,
         render_mode:                    Optional[str] = None,
         cell_px:                        int   = 32,
     ) -> None:
@@ -138,12 +174,20 @@ class MazeEnv:
         self._death_penalty       = death_penalty
         self._step_penalty        = step_penalty
         self._timeout_penalty     = timeout_penalty
+        self._shaping_scale       = shaping_scale
 
         # Rendering
         self._render_mode = render_mode
         self._cell_px     = cell_px
         self._screen      = None
         self._clock       = None
+
+        # Observation frame stack
+        self._n_stack     = n_stack
+        self._cell_obs_px = cell_obs_px
+        self._obs_h       = _VIEW_SIZE * cell_obs_px
+        self._obs_w       = _VIEW_SIZE * cell_obs_px
+        self._frame_buf: deque = deque(maxlen=n_stack)
 
         # Build maze
         self._builder = MazeBuilder(
@@ -209,6 +253,13 @@ class MazeEnv:
         self._player_pos = self._try_move(prev_pos, MazeAction(action))
         curr_pos         = self._player_pos
 
+        # Potential-based reward shaping: F(s,s') = phi(s') - phi(s)
+        # phi(s) = -dist_to_exit(s): moving closer gives +scale, farther gives -scale, still gives 0.
+        if self._shaping_scale > 0.0:
+            phi_prev = -self._builder.dist_to_exit(prev_pos)
+            phi_curr = -self._builder.dist_to_exit(curr_pos)
+            reward  += self._shaping_scale * (phi_curr - phi_prev)
+
         # Obstacle steps happen after the player moves
         for obs in self._obstacles:
             obs.step()
@@ -248,6 +299,11 @@ class MazeEnv:
     def __exit__(self, *_args) -> None:
         self.close()
 
+    @property
+    def obs_size(self) -> tuple:
+        """Observation shape: (n_stack + 1, H, W).  The +1 is the step-fraction channel."""
+        return (self._n_stack + 1, self._obs_h, self._obs_w)
+
     # ------------------------------------------------------------------
     # Episode internals
     # ------------------------------------------------------------------
@@ -258,6 +314,7 @@ class MazeEnv:
         self._is_done    = False
         for obs in self._obstacles:
             obs.reset()
+        self._frame_buf.clear()
 
     def _try_move(self, pos: Pos, action: MazeAction) -> Pos:
         if action == MazeAction.NoOp:
@@ -291,61 +348,102 @@ class MazeEnv:
 
     def _observe(self) -> np.ndarray:
         """
-        Build the 26-float observation vector matching MazeAgent.CollectObservations.
+        Render the egocentric 5×5 view, stack n_stack frames, then append a
+        5th channel encoding the remaining step fraction (uniform value across
+        all pixels).  This breaks perceptual aliasing between identical-looking
+        locations visited at different points in the episode.
 
-        Layout:
-          [0–24]  5×5 egocentric local grid, row-major north-to-south then west-to-east.
-                  Centre cell (index 12) is always the player's position.
-          [25]    Remaining step fraction = 1 − step_count / max_episode_steps.
+        Returns (n_stack + 1, H, W) float32 array in [0, 1].
         """
-        obs  = np.zeros(_OBS_SIZE, dtype=np.float32)
-        px, py   = self._player_pos
-        ex, ey   = self._builder.exit_cell
-        exit_pos = (ex, ey)
+        frame = self._render_frame()
+        self._frame_buf.append(frame)
+        frames = list(self._frame_buf)
+        while len(frames) < self._n_stack:
+            frames.insert(0, frames[0])
+        stacked = np.stack(frames, axis=0)   # (n_stack, H, W)
 
-        # Build obstacle position set once for O(1) look-ups in the inner loop
-        obstacle_cells = {o.current_pos for o in self._obstacles}
-
-        idx = 0
-        for dy in range(_HALF_VIEW, -_HALF_VIEW - 1, -1):   # +2 … -2
-            for dx in range(-_HALF_VIEW, _HALF_VIEW + 1):   # -2 … +2
-                obs[idx] = self._encode_cell(
-                    (px + dx, py + dy), exit_pos, obstacle_cells
-                )
-                idx += 1
-
-        # [25] Remaining step fraction
+        # Step-fraction channel: 1.0 at episode start → 0.0 at timeout
         if self._max_episode_steps > 0:
-            obs[25] = 1.0 - self._step_count / self._max_episode_steps
+            step_frac = 1.0 - self._step_count / self._max_episode_steps
         else:
-            obs[25] = 1.0
+            step_frac = 1.0
+        step_ch = np.full((1, self._obs_h, self._obs_w), step_frac, dtype=np.float32)
 
-        return obs
+        return np.concatenate([stacked, step_ch], axis=0)   # (n_stack+1, H, W)
 
-    def _encode_cell(
-        self,
-        cell:            Pos,
-        exit_pos:        Pos,
-        obstacle_cells:  set,
-    ) -> float:
+    def _render_frame(self) -> np.ndarray:
         """
-        Single-float cell encoding with priority:
-          wall / OOB > obstacle > exit > floor
+        Render the 5×5 egocentric view as a (H, W) float32 greyscale image.
+        Cells hidden behind walls are painted black (0.0).
         """
-        x, y = cell
-        if x < 0 or x >= self._builder.width or y < 0 or y >= self._builder.height:
-            return 1.0   # out-of-bounds treated as wall
+        px_size = self._cell_obs_px
+        frame   = np.zeros((self._obs_h, self._obs_w), dtype=np.float32)
 
-        if not self._builder.is_walkable(cell):
-            return 1.0   # wall
+        player_pos     = self._player_pos
+        visible        = self._compute_visible_cells(player_pos)
+        obstacle_cells = {o.current_pos for o in self._obstacles}
+        exit_pos       = self._builder.exit_cell
 
-        if cell in obstacle_cells:
-            return 0.75  # moving hazard
+        for row, dy in enumerate(range(_HALF_VIEW, -_HALF_VIEW - 1, -1)):
+            for col, dx in enumerate(range(-_HALF_VIEW, _HALF_VIEW + 1)):
+                abs_pos = (player_pos[0] + dx, player_pos[1] + dy)
+                y0, y1  = row * px_size, (row + 1) * px_size
+                x0, x1  = col * px_size, (col + 1) * px_size
 
-        if cell == exit_pos:
-            return 0.5   # exit goal
+                # Player's own cell — always visible
+                if abs_pos == player_pos:
+                    frame[y0:y1, x0:x1] = _PX_PLAYER
+                    continue
 
-        return 0.0       # floor (includes player's own cell at index 12)
+                if abs_pos not in visible:
+                    frame[y0:y1, x0:x1] = _PX_OCCLUDED
+                    continue
+
+                bx, by = abs_pos
+                if (bx < 0 or bx >= self._builder.width or
+                        by < 0 or by >= self._builder.height):
+                    frame[y0:y1, x0:x1] = _PX_WALL
+                elif not self._builder.is_walkable(abs_pos):
+                    frame[y0:y1, x0:x1] = _PX_WALL
+                elif abs_pos in obstacle_cells:
+                    frame[y0:y1, x0:x1] = _PX_OBSTACLE
+                elif abs_pos == exit_pos:
+                    frame[y0:y1, x0:x1] = _PX_EXIT
+                else:
+                    frame[y0:y1, x0:x1] = _PX_FLOOR
+
+        return frame
+
+    def _compute_visible_cells(self, player_pos: Pos) -> set:
+        """
+        Return the set of absolute grid positions visible from *player_pos*
+        within the 5×5 egocentric view, applying wall-based LOS occlusion.
+        """
+        visible = set()
+        px, py  = player_pos
+        for dy in range(_HALF_VIEW, -_HALF_VIEW - 1, -1):
+            for dx in range(-_HALF_VIEW, _HALF_VIEW + 1):
+                target = (px + dx, py + dy)
+                if self._is_visible(player_pos, target):
+                    visible.add(target)
+        return visible
+
+    def _is_visible(self, player_pos: Pos, target_pos: Pos) -> bool:
+        """
+        LOS check via Bresenham's line.  A target cell is visible if no wall
+        (or OOB cell) lies strictly between the player and the target.
+        """
+        if player_pos == target_pos:
+            return True
+        px, py = player_pos
+        tx, ty = target_pos
+        for cx, cy in _bresenham_between(px, py, tx, ty):
+            if (cx < 0 or cx >= self._builder.width or
+                    cy < 0 or cy >= self._builder.height):
+                return False
+            if not self._builder.is_walkable((cx, cy)):
+                return False
+        return True
 
     # ------------------------------------------------------------------
     # Pygame rendering

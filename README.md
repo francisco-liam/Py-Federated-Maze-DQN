@@ -1,17 +1,28 @@
 # Federated DQN Maze
 
-A Deep Q-Network (DQN) reinforcement learning baseline for procedurally generated maze navigation. The agent learns to reach the exit while avoiding moving obstacles, using only a local egocentric view of its surroundings. The project is structured as a single-client baseline in preparation for federated multi-agent training.
+A pixel-based Deep Q-Network (DQN) agent trained to navigate procedurally generated mazes using only a limited line-of-sight view — then extended to a federated learning (FL) experiment where multiple agents train on different maze topologies and periodically share weights.
 
 ---
 
 ## Overview
 
-The environment is a pure Python/Pygame maze that mirrors the interface of a previous Unity ML-Agents integration. The DQN agent uses a standard online/target network setup with experience replay, epsilon-greedy exploration, and Huber loss.
+The environment is a pure Python maze with Pygame rendering. The DQN agent observes a 5×5-cell egocentric window rendered to pixels (40×40), with walls occluding sight lines. Four frames are stacked (Atari-style) and a step-fraction channel is appended to break perceptual aliasing.
+
+The project has two training modes:
+
+1. **Single-agent baseline** (`train_dqn.py`) — one agent, one fixed maze seed
+2. **Federated training** (`train_federated.py`) — 3 clients each on a different maze seed, aggregated via FedAvg or FedProx, evaluated on a held-out seed
 
 ```
-Agent ──(obs 26f)──► QNetwork (MLP) ──► 5 Q-values ──► action
-  │                                                        │
-  └──────────────── ReplayBuffer ◄────── env.step() ───────┘
+              ┌─────────────────────────────┐
+              │  FL Server (global QNetwork)│
+              │  fedavg() ← client weights  │
+              └────┬────────┬────────┬──────┘
+                   │        │        │  broadcast global weights
+              ┌────▼──┐ ┌───▼───┐ ┌──▼────┐
+              │seed=0 │ │seed=42│ │seed=99│  ← non-IID clients
+              └───────┘ └───────┘ └───────┘
+                              evaluated on seed=7 (held-out)
 ```
 
 ---
@@ -20,22 +31,24 @@ Agent ──(obs 26f)──► QNetwork (MLP) ──► 5 Q-values ──► act
 
 ```
 Federated-DQN-Maze/
-├── train_dqn.py              # Training loop entry point
+├── train_dqn.py              # Single-agent baseline training
+├── train_federated.py        # Federated training (FedAvg / FedProx)
+├── prepare_fl.py             # Maze diversity audit + baseline training
 ├── play.py                   # Play the maze manually (arrow keys / WASD)
 ├── test_env.py               # Quick environment smoke test (random agent)
 ├── requirements.txt
-├── .gitignore
 ├── agent/
-│   ├── __init__.py
-│   ├── dqn_agent.py          # DQN agent (exploration, training, checkpointing)
-│   ├── q_network.py          # 3-layer MLP Q-network
-│   └── replay_buffer.py      # Uniform circular experience replay buffer
-└── maze_env/
-    ├── __init__.py
-    ├── definitions.py        # Enums: MazeCellType, MazeAction, MazeTerminalReason
-    ├── maze_builder.py       # Procedural DFS maze generation + obstacle placement
-    ├── maze_env.py           # Gym-style environment wrapper (reset / step / close)
-    └── moving_obstacle.py    # Deterministic ping-pong hazard
+│   ├── dqn_agent.py          # DQN agent + FL helpers (get/load/proximal weights)
+│   ├── q_network.py          # Nature-DQN CNN: Conv×3 → FC×2
+│   └── replay_buffer.py      # Uniform circular replay buffer
+├── maze_env/
+│   ├── definitions.py        # Enums: MazeCellType, MazeAction, MazeTerminalReason
+│   ├── maze_builder.py       # DFS maze gen + BFS exit-distance map
+│   ├── maze_env.py           # Gym-style env: LOS rendering, frame stack, shaping
+│   └── moving_obstacle.py    # Ping-pong hazard
+└── federated/
+    ├── fl_client.py          # FLClient: local env + agent, train_round()
+    └── fl_server.py          # FLServer: global QNetwork, fedavg(), evaluate()
 ```
 
 ---
@@ -43,164 +56,140 @@ Federated-DQN-Maze/
 ## Environment
 
 ### Observation Space
-A flat vector of **26 floats**:
+Shape `(5, 40, 40)` — float32 tensor:
 
-| Index | Description |
-|-------|-------------|
-| 0–24  | 5×5 egocentric local grid (row-major, north→south / west→east) |
-| 25    | Remaining step fraction (1.0 = episode start, 0.0 = timeout) |
+| Channel(s) | Content |
+|---|---|
+| 0–3 | 4 stacked greyscale LOS frames (8 px/cell, 40×40 canvas) |
+| 4 | Step-fraction broadcast to all pixels (breaks perceptual aliasing) |
 
-Cell encodings in the local grid:
-
-| Value | Cell type |
-|-------|-----------|
-| 0.00  | Floor |
-| 0.50  | Exit |
-| 0.75  | Moving obstacle |
-| 1.00  | Wall / out-of-bounds |
+Line-of-sight uses Bresenham ray-casting — walls block vision of cells behind them.
 
 ### Action Space
-5 discrete actions:
+5 discrete actions: `NoOp, Up, Left, Down, Right`
 
-| ID | Action |
-|----|--------|
-| 0  | NoOp   |
-| 1  | Up     |
-| 2  | Left   |
-| 3  | Down   |
-| 4  | Right  |
+### Rewards
+| Event | Reward |
+|---|---|
+| Reach exit | +1.0, episode ends |
+| Each step | −1/max\_steps |
+| Timeout | episode ends |
+| Shaping | `0.05 × (φ(s′) − φ(s))`, `φ = −BFS_dist_to_exit` |
 
-### Rewards & Terminals
-
-| Event | Outcome |
-|-------|---------|
-| Reach the exit | +1.0, episode ends |
-| Collide with a moving obstacle | Terminal (death) |
-| Step penalty | Small negative reward each step |
-| Timeout | Episode ends |
-
-A positive total return indicates a successful episode (reached exit before penalties exceeded +1.0).
-
-### Maze Generation
-The `MazeBuilder` uses an **iterative DFS / recursive backtracker** algorithm with:
-- Configurable dimensions (forced odd, ≥ 5), default 21×21
-- Start/exit placement via double-BFS diameter approximation
-- Deterministic ping-pong obstacles placed on discovered patrol segments
-- Obstacle-aware solvability validation
-- Automatic fallback to a hardcoded 15×11 layout if all procedural attempts fail
-- Optional Pygame rendering
+Potential-based shaping (`φ(s′)−φ(s)`) provides dense gradient signal without changing the optimal policy.
 
 ---
 
 ## Agent
 
-`DQNAgent` implements a standard DQN with the following features:
+Nature-DQN CNN with Double DQN updates:
 
-| Feature | Detail |
-|---------|--------|
-| Q-network | 3-layer MLP: 26 → 128 → 128 → 5 |
-| Exploration | Linear ε-greedy decay: 1.0 → 0.05 over 10k steps |
-| Replay buffer | Uniform circular buffer, capacity 50k |
-| Loss | Smooth-L1 (Huber) |
-| Target network | Hard sync every 1,000 gradient steps |
-| Gradient clipping | max norm 10.0 |
-| Optimizer | Adam, lr=1e-3 |
-| Discount factor | γ = 0.99 |
+| Layer | Detail |
+|---|---|
+| Conv1 | 5→32, 4×4, stride 2 |
+| Conv2 | 32→64, 3×3, stride 2 |
+| Conv3 | 64→64, 3×3, stride 1 |
+| FC1 | 512 units, ReLU |
+| FC2 | 5 Q-values |
+
+| Hyperparameter | Value |
+|---|---|
+| Optimizer | Adam, lr=1e-4 |
+| Discount γ | 0.99 |
+| Batch size | 32 |
+| Buffer capacity | 200k (baseline) / 15k (FL) |
+| Warmup steps | 5,000 (baseline) / 2,000 (FL) |
+| ε decay | 1.0 → 0.1 over 50k steps |
+| Eval ε | 0.05 |
+| Target sync | every 1,000 grad steps |
 
 ---
 
 ## Training
 
-### Hyperparameters (defaults in `train_dqn.py`)
+### Single-agent baseline
+
+```bash
+python3 train_dqn.py
+```
+
+Trains on seed=0, 21×21 maze, no obstacles. Achieves 100% success by episode ~400, mean_return≈+6.68 at episode 1000.
+
+Checkpoint saved to `checkpoints/baseline_seed0_ep1000.pt`.
+
+### Federated training
+
+```bash
+# FedAvg — step-weighted aggregation (default)
+python3 train_federated.py
+
+# FedAvg — equal-weight aggregation
+python3 train_federated.py --equal_weight
+
+# FedProx — proximal penalty to reduce client drift
+python3 train_federated.py --mu 0.1 --equal_weight
+```
+
+Each run saves:
+- `checkpoints/fl_<tag>_final.pt` — final global model
+- `checkpoints/summary_<tag>.txt` — eval history on held-out seed
+
+FL config (in `train_federated.py`):
 
 | Parameter | Value |
-|-----------|-------|
-| `OBS_SIZE` | 26 |
-| `N_ACTIONS` | 5 |
-| `HIDDEN_SIZE` | 128 |
-| `LR` | 1e-3 |
-| `GAMMA` | 0.99 |
-| `BATCH_SIZE` | 64 |
-| `BUFFER_CAPACITY` | 50,000 |
-| `WARMUP_STEPS` | 1,000 |
-| `TRAIN_FREQ` | 4 (gradient step every 4 env steps) |
-| `TARGET_UPDATE_FREQ` | 1,000 gradient steps |
-| `EPS_START / EPS_END` | 1.0 / 0.05 |
-| `EPS_DECAY_STEPS` | 10,000 |
-| `MAX_EPISODES` | 2,000 |
-| `EVAL_EVERY` | 50 episodes |
-| `EVAL_EPISODES` | 10 episodes |
-| `SAVE_EVERY` | 200 episodes |
+|---|---|
+| Client seeds | 0, 42, 99 |
+| Held-out eval seed | 7 |
+| FL rounds | 50 |
+| Local episodes/round | 30 |
+| Buffer capacity | 15k per client |
+| ε decay | 1.0 → 0.1 over 120k steps (spans full training) |
 
-### Training Loop Design
-The loop is **step-based**, not episode-based. When `done=True`, the environment auto-resets internally and returns the first observation of the new episode as `next_obs`, so the training loop requires no special reset handling.
+### Play the maze yourself
 
-Checkpoints are saved to `checkpoints/dqn_ep{N}.pt`. To resume from a checkpoint, set `RESUME_FROM` in `train_dqn.py`.
+```bash
+python3 play.py
+```
+
+---
+
+## FL Experiment Results
+
+### Baseline (single-agent, seed=0, evaluated on seed=7)
+
+The baseline agent reaches 100% success on its training maze (seed=0) but has not been evaluated zero-shot on seed=7 — this is the comparison target.
+
+### Federated results (held-out seed=7)
+
+All experiments so far achieve **0% success on seed=7**. Clients individually converge (seed=0 client reaches +2–3 mean return) but the averaged global model fails everywhere.
+
+**Diagnosis:** This is a textbook heterogeneous FL failure. Q-values learned on three structurally different maze topologies are on incompatible scales — averaging them destroys all three local policies simultaneously. The `sr0/42/99` diagnostic columns (per-client success rate of the *global* model) consistently show 100%/0%/0%, confirming seed=0's Q-functions dominate the average.
+
+**Experiments run:**
+
+| Method | Rounds | Local eps | Held-out SR |
+|---|---|---|---|
+| FedAvg (step-weighted) | 30 | 50 | 0% |
+| FedAvg+EqW | 60 | 15 | 0% |
+| FedProx mu=0.1+EqW | 30 | 50 | 0% |
+| FedAvg (eps_reset/round) | 60 | 15 | 0% |
+| FedAvg (eps_decay=120k) | 50 | 30 | *in progress* |
+
+### Next steps
+
+- [ ] Personalised FL: shared CNN trunk, per-client output heads
+- [ ] FedMA: layer-wise weight matching before averaging
+- [ ] Reduce non-IID severity: seeds with similar BFS distance distributions
+- [ ] Document failure as a finding: motivates personalised FL for RL
 
 ---
 
 ## Installation
 
 ```bash
-python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Requirements:
-- `torch >= 2.0.0`
-- `numpy >= 1.24.0`
-- `pygame >= 2.0.0`
+Requirements: `torch >= 2.0`, `numpy >= 1.24`, `pygame >= 2.0`
 
----
 
-## Usage
-
-### Train the DQN agent
-
-```bash
-python train_dqn.py
-```
-
-Training output (every 10 episodes):
-```
-Ep   10 | return +0.823 | avg100 +0.412 | eps 0.950 | steps 4,231 | buf 4,231 | loss 0.0341
-  [EVAL ep=50] mean_return=+0.612 ±0.211  success_rate=60%
-  Saved: checkpoints/dqn_ep200.pt
-```
-
-To resume from a checkpoint, edit `train_dqn.py`:
-```python
-RESUME_FROM: Optional[str] = "checkpoints/dqn_ep200.pt"
-```
-
-Checkpoints are saved to `checkpoints/` (gitignored) every 200 episodes.
-
-### Play the maze yourself
-
-```bash
-python play.py
-```
-
-| Key | Action |
-|-----|--------|
-| Arrow keys / WASD | Move |
-| R | New maze |
-| Q / Escape | Quit |
-
-### Test the environment (random agent)
-
-```bash
-python test_env.py
-```
-
-Runs 3 episodes with random actions and prints the return. Set `RENDER = False` in the file for headless mode.
-
----
-
-## Roadmap
-
-- [ ] Prioritized experience replay
-- [ ] Double DQN / Dueling network heads
-- [ ] CNN observation encoder (reshape 25 grid cells to 5×5)
-- [ ] Federated aggregation: multiple independent agents, periodic weight averaging
-- [ ] Curriculum: progressive maze size / obstacle count increase

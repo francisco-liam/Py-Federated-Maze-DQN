@@ -445,6 +445,14 @@ class MazeBuilder:
             elif cell == MazeCellType.Exit:
                 self.exit_cell = pos
 
+        # BFS distance from every walkable cell to the exit (used for reward shaping).
+        # Distances are computed from the exit outward so a single BFS covers all cells.
+        self._dist_to_exit: Dict[Pos, int] = _bfs_distances(grid, self.exit_cell, blocked=None)
+
+    def dist_to_exit(self, pos: Pos) -> int:
+        """BFS distance from *pos* to the exit.  Returns a large sentinel if unreachable."""
+        return self._dist_to_exit.get(pos, 9999)
+
     # ------------------------------------------------------------------
     # Misc helpers
     # ------------------------------------------------------------------

@@ -1,20 +1,21 @@
 """
-Q-Network for the maze DQN baseline.
+Convolutional Q-Network for pixel-based maze DQN (Atari-style).
 
-Architecture: 3-layer MLP.
-- Deep enough to learn maze navigation from a local grid view.
-- Shallow enough to converge fast on CPU for early debugging runs.
-- No CNN for the first baseline: the 5x5 grid is only 25 cells,
-  so the spatial structure does not justify the complexity of convolutions.
-  A CNN upgrade is straightforward later (reshape obs to [1, 5, 5] + 1 extra).
+Processes stacked greyscale frames of the egocentric 5×5 view rendered
+at `cell_obs_px` pixels per cell (default 8 → 40×40 frames).
 
-Input:  26 floats
-  - 25 floats: 5x5 egocentric local grid, row-major north-to-south/west-to-east
-      0.00 = floor   0.50 = exit   0.75 = obstacle   1.00 = wall/OOB
-  - 1 float:  remaining step fraction (1.0 = episode start, 0.0 = timeout)
+Input:  (batch, n_stack, H, W) float32 in [0, 1]
+        Default: (batch, 4, 40, 40)
 
-Output: 5 Q-values, one per discrete action
-  0 = NoOp  |  1 = Up  |  2 = Left  |  3 = Down  |  4 = Right
+Output: (batch, n_actions) Q-values
+
+Architecture mirrors Nature DQN (Mnih et al. 2015) with kernel sizes and
+strides rescaled for the smaller 40×40 input instead of 84×84.
+  Conv(4→32, 4×4, stride 2) → 32×19×19
+  Conv(32→64, 3×3, stride 2) → 64×9×9
+  Conv(64→64, 3×3, stride 1) → 64×7×7
+  Flatten → 3136
+  Linear(3136 → 512) → Linear(512 → n_actions)
 """
 
 import torch
@@ -22,21 +23,34 @@ import torch.nn as nn
 
 
 class QNetwork(nn.Module):
-    def __init__(self, obs_size: int = 26, n_actions: int = 5, hidden_size: int = 128):
+    def __init__(self, obs_shape: tuple = (4, 40, 40), n_actions: int = 5):
         super().__init__()
-        self.net = nn.Sequential(
-            nn.Linear(obs_size, hidden_size),
+        n_stack, H, W = obs_shape
+
+        self.conv = nn.Sequential(
+            nn.Conv2d(n_stack, 32, kernel_size=4, stride=2),
             nn.ReLU(),
-            nn.Linear(hidden_size, hidden_size),
+            nn.Conv2d(32, 64, kernel_size=3, stride=2),
             nn.ReLU(),
-            nn.Linear(hidden_size, n_actions),
+            nn.Conv2d(64, 64, kernel_size=3, stride=1),
+            nn.ReLU(),
+        )
+
+        # Compute flattened conv output size dynamically for any (H, W)
+        with torch.no_grad():
+            conv_out = int(self.conv(torch.zeros(1, n_stack, H, W)).numel())
+
+        self.fc = nn.Sequential(
+            nn.Linear(conv_out, 512),
+            nn.ReLU(),
+            nn.Linear(512, n_actions),
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Args:
-            x: float tensor of shape (batch, obs_size)
+            x: float tensor of shape (batch, n_stack, H, W), values in [0, 1]
         Returns:
             Q-values of shape (batch, n_actions)
         """
-        return self.net(x)
+        return self.fc(self.conv(x).flatten(1))

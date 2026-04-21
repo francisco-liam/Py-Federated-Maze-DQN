@@ -13,6 +13,9 @@ checkpoints/
 *.pt
 *.pth
 
+# Summary text files (generated per run — not source)
+checkpoints/summary_*.txt
+
 # Pytest / coverage
 .pytest_cache/
 .coverage
